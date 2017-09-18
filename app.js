@@ -10,7 +10,8 @@ let players = {
 
 let currentPlayer = players.Player1;
 let positionsTaken = [];
-
+// let hash = {}; // { 0-0: null, 0-1: 'X', .. }
+let boardArray = [[null, null, null], [null, null, null], [null, null, null]];
 
 // EVENT LISTENERS
 board.addEventListener('click', function(e) {
@@ -22,7 +23,13 @@ board.addEventListener('click', function(e) {
   if (isPositionTaken(position) === false) {
     // record position taken
     positionsTaken.push(position);
+    let tuple = position.split('-');
+    let rowPos = tuple[0];
+    let colPos = tuple[1];
+    boardArray[rowPos][colPos] = currentPlayer;
+    
     console.log('positions taken is', positionsTaken);
+    console.log('board array is', boardArray);
 
     // update div for marking X/O
     target.textContent = currentPlayer;
@@ -30,11 +37,7 @@ board.addEventListener('click', function(e) {
 
 
     // check to see if game is over
-
-      // when there is a winning condition
-        // if there are 3 in a row for either X or O
-
-      // else if positionsTaken.length === 9 (full board)
+    checkWinStatus();
   }
 });
 
@@ -69,6 +72,24 @@ function switchPlayer() {
 
 function clearBoard() {
 
+}
+
+function checkWinStatus() {
+  // when there is a winning condition
+
+  // if there are 3 in a row for either X or O
+
+  // for (let row=0; row<boardArray.length; row++) {
+  //   let currentRow = boardArray[row];
+  //   for (let col=0; col)
+    
+  // }
+
+  // else if positionsTaken.length === 9 (full board)
+  if (positionsTaken.length === 9) {
+    warning.textContent = "Game over, no one wins";
+    gameInfo.textContent = "";
+  }
 }
 
 // RUN UPON PAGE LOAD
