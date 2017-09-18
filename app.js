@@ -1,4 +1,14 @@
+// VARIABLES
 let board = document.querySelector('#board');
+let gameInfo = document.querySelector('#game-info');
+let players = {
+  Player1: 'X',
+  Player2: 'O',
+};
+
+let currentPlayer = players.Player1;
+let positionsTaken = [];
+
 
 // EVENT LISTENERS
 board.addEventListener('click', function(e) {
@@ -7,32 +17,32 @@ board.addEventListener('click', function(e) {
   let position = target.getAttribute('data-pos');
   console.log('position is', position);
 
+  target.textContent = currentPlayer;
+  updateTurns();
 });
-
-// VARIABLES
-let currentPlayer;
-
 
 
 // METHODS
 function startGame() {
-  let gameInfo = document.querySelector('#game-info');
-  gameInfo.textContent = 'Player 1 start';
+  gameInfo.textContent = `${currentPlayer}'s turn to go!`;
 }
 
-function nextTurn() {
+function updateTurns() {
+  switchPlayer();
+  
+}
 
+function switchPlayer() {
+  if (currentPlayer === players.Player1) {
+    currentPlayer = players.Player2;
+  } else if (currentPlayer === players.Player2) {
+    currentPlayer = players.Player1;
+  }
+  console.log('current player is now', currentPlayer);
+  gameInfo.textContent = `${currentPlayer}'s turn to go!`;
 }
 
 function clearBoard() {
-
-}
-
-function markX() {
-
-}
-
-function markO() {
 
 }
 
